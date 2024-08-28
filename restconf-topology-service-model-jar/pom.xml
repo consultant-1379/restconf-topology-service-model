@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>restconf-topology-service-model</artifactId>
+        <groupId>com.ericsson.oss.services.restconf.topologyservice</groupId>
+        <version>1.4.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>restconf-topology-service-model-jar</artifactId>
+    <name>[${project.parent.artifactId}] JAR Models</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ericsson.oss.itpf.modeling.tools</groupId>
+            <artifactId>modeling-annotation-processor-jar</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.ericsson.oss.itpf.modeling.tools</groupId>
+                <artifactId>modeling-annotation-processor-jar</artifactId>
+                <version>${version.modeling-annotation-processor-jar}</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>annoproc</goal>
+                        </goals>
+                        <configuration>
+                            <classesRoot>${project.build.directory}/classes</classesRoot>
+                            <modelBuildDir>../${project.parent.artifactId}-models/model-build</modelBuildDir>
+                            <inclusionPatterns>
+                                <includes>
+                                    com.ericsson.oss.services.**
+                                </includes>
+                            </inclusionPatterns>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

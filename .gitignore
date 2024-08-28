@@ -1,0 +1,46 @@
+# Compiled source #
+*.class
+*/bin/*
+
+# Eclipse files
+.project
+.classpath
+.settings
+.checkstyle
+
+# IntelliJ files
+*.iml
+.idea*
+
+# Packages
+*.jar
+
+# Maven build files
+target
+reports
+
+# ARQ tests
+arq-perf
+
+# PMD
+.pmd
+
+# Generated files
+*.ser
+
+# Merge files
+*.orig
+.merge_file_*
+
+# swp files
+*.swp
+
+# Editor backups
+*~
+
+# Logs
+CHANGELOG
+mvn*.log
+
+# model-build
+model-build

@@ -1,0 +1,234 @@
+module ericsson-node-ext {
+  yang-version 1.1;
+  namespace "urn:com:ericsson:schema:xml:ns:yang:ericsson-node-ext";
+  prefix nodeext;
+
+  import ietf-network {
+    prefix nw;
+  }
+
+  organization
+    "Ericsson AB";
+  contact
+    "Web: <http://www.ericsson.com>";
+  description
+    "The node extension yang module for newly defined attributes
+     Copyright (c) 2022 Ericsson AB.
+     All rights reserved";
+
+  revision 2022-04-01 {
+    description
+      "Defined new attributes for node";
+  }
+
+  augment "/nw:networks/nw:network/nw:node" {
+    description
+      "Addition of data nodes for node  to
+       the standard Network data model";
+    leaf lldp-sys-name {
+      type string;
+      mandatory false;
+      description
+        "System name of the node in the LLDP protocol";
+    }
+    leaf ne-type {
+      description
+        "Different network types";
+      type enumeration {
+        enum ccn-tsp {
+          description
+            "CCN TSP nodes";
+        }
+        enum cisco-asr900 {
+          description
+            "CISCO-ASR90 nodes";
+        }
+        enum cisco-asr9000 {
+          description
+            "CISCO-ASR9000 nodes";
+        }
+        enum cscf-tsp {
+          description
+            "CSCF-TSP nodes";
+        }
+        enum controller6610 {
+          description
+            "Controller6610 nodes";
+        }
+        enum eci-optical {
+          description
+            "ECI-Optical nodes";
+        }
+        enum esc {
+          description
+            "ESC nodes";
+        }
+        enum extreme-eos {
+          description
+            "EXTREME-EOS nodes";
+        }
+        enum extreme-exos {
+          description
+            "EXTREME-EXOS nodes";
+        }
+        enum fronthaul-6020 {
+          description
+            "FRONTHAUL-6020 nodes";
+        }
+        enum fronthaul-6080 {
+          description
+            "FRONTHAUL-6080 nodes";
+        }
+        enum fronthaul-6392 {
+          description
+            "Fronthaul-6392 nodes";
+        }
+        enum genericESA {
+          description
+            "GenericESA nodes";
+        }
+        enum hss-fe-tsp {
+          description
+            "HSS-FE-TSP nodes";
+        }
+        enum juniper-mx {
+          description
+            "JUNIPER-MX nodes";
+        }
+        enum juniper-ptx {
+          description
+            "JUNIPER-PTX nodes";
+        }
+        enum juniper-srx {
+          description
+            "UNIPER-SRX nodes";
+        }
+        enum juniper-vmx {
+          description
+            "JUNIPER-vMX nodes";
+        }
+        enum juniper-vsrx {
+          description
+            "JUNIPER-vSRX nodes";
+        }
+        enum mini-link-6351 {
+          description
+            "MINI-LINK-6351 nodes";
+        }
+        enum mini-link-6352 {
+          description
+            "MINI-LINK-6352 nodes";
+        }
+        enum lini-link-6366 {
+          description
+            "MINI-LINK-6366 nodes";
+        }
+        enum mini-link-665x {
+          description
+            "MINI-LINK-665x nodes";
+        }
+        enum mini-link-669x {
+          description
+            "MINI-LINK-669x nodes";
+        }
+        enum mini-link-cn210 {
+          description
+            "MINI-LINK-CN210 nodes";
+        }
+        enum mini-link-cn510r1 {
+          description
+            "MINI-LINK-CN510R1 nodes";
+        }
+        enum MINI-LINK-cn510r2 {
+          description
+            "MINI-LINK-CN510R2 nodes";
+        }
+        enum mini-link-cn810r1 {
+          description
+            "MINI-LINK-CN810R1 nodes";
+        }
+        enum mini-link-cn810r2 {
+          description
+            "MINI-LINK-CN810R2 nodes";
+        }
+        enum mini-link-indoor {
+          description
+            "MINI-LINK-Indoor nodes";
+        }
+        enum mini-link-pt2020 {
+          description
+            "MINI-LINK-PT2020 nodes";
+        }
+        enum mtas-tsp {
+          description
+            "MTAS-TSP nodes";
+        }
+        enum router6273 {
+          description
+            "Router6273 nodes";
+        }
+        enum router6274 {
+          description
+            "Router6274 nodes";
+        }
+        enum router6672 {
+          description
+            "Router6672 nodes";
+        }
+        enum router6673 {
+          description
+            "Router6673 nodes";
+        }
+        enum router6675 {
+          description
+            "Router6675 nodes";
+        }
+        enum router6x71 {
+          description
+            "Router6x71 nodes";
+        }
+        enum router8800 {
+          description
+            "Router8800 nodes";
+        }
+        enum sbg-is {
+          description
+            "SBG-IS nodes";
+        }
+        enum scu {
+          description
+            "SCU nodes";
+        }
+        enum siu02 {
+          description
+            "SIU02 nodes";
+        }
+        enum SSR {
+          description
+            "SSR nodes";
+        }
+        enum switch-6391 {
+          description
+            "Switch-6391 nodes";
+        }
+        enum tcu02 {
+          description
+            "TCU02 nodes";
+        }
+        enum vpn-tsp {
+          description
+            "VPN-TSP nodes";
+        }
+        enum csapc-tsp {
+          description
+            "cSAPC-TSP nodes";
+        }
+        enum vbng {
+          description
+            "vBNG nodes";
+        }
+      }
+      mandatory false;
+    }
+  }
+}

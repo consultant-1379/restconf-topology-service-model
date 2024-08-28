@@ -1,0 +1,110 @@
+module ietf-microwave-radio-link-ext {
+  yang-version 1.1;
+  namespace "urn:com:ericsson:schema:xml:ns:yang:ietf-microwave-radio-link-ext";
+  prefix ctext;
+
+  import ietf-interfaces {
+    prefix if;
+  }
+  import iana-if-type {
+    prefix ianaift;
+  }
+
+  organization
+    "Ericsson AB";
+  contact
+    "Web: <http://www.ericsson.com>";
+  description
+    "The microwave radio link extension yang module for newly defined attributes
+     Copyright (c) 2022 Ericsson AB.
+     All rights reserved";
+
+  revision 2022-04-01 {
+    description
+      "Defined new attributes in microwave radio link standard model";
+  }
+
+  augment "/if:interfaces/if:interface" {
+    when "derived-from-or-self(if:type,"
+       + "'ianaift:microwaveCarrierTermination')";
+    description
+      "Addition of data nodes for carrier termination to
+       the standard Interface data model, for interfaces
+       of the type 'microwaveCarrierTermination'.";
+    leaf rx-frequency-config {
+      type boolean;
+      default "false";
+      mandatory false;
+      description
+        "A choice to configure rx-frequency directly or compute it as duplex-distance subtracted from tx-frequency.";
+    }
+    leaf ct-distinguished-name {
+      type string;
+      mandatory false;
+      description
+        "The distinguished name of near-end Carrier Termination (CT).";
+    }
+    leaf far-end-ct-distinguished-name {
+      type string;
+      mandatory false;
+      description
+        "The distinguished name of far-end Carrier Termination (CT).";
+    }
+  }
+
+  augment "/if:interfaces/if:interface" {
+    when "derived-from-or-self(if:type,"
+       + "'ianaift:microwaveRadioLinkTerminal')";
+    description
+      "Addition of data nodes for radio link terminal to
+       the standard Interface data model, for interfaces
+       of the type 'microwaveRadioLinkTerminal'.";
+    leaf terminal-id {
+      type string;
+      mandatory false;
+      description
+        "Descriptive terminal identity along with rack/slot/port value of the near-end radio link terminal.";
+    }
+    leaf node-name {
+      type string;
+      mandatory false;
+      description
+        "The name of the network element the Radio Link Terminal (RLT) belongs to (System Name - sysName).";
+    }
+    leaf far-end-terminal-id {
+      type string;
+      mandatory false;
+      description
+        "Descriptive terminal identity along with rack/slot/port value of the far-end radio link terminal.";
+    }
+    leaf far-end-node-name {
+      type string;
+      mandatory false;
+      description
+        "The name of the network element the far-end Radio Link Terminal (RLT) belongs to (System Name - sysName).";
+    }
+  }
+
+  augment "/if:interfaces/if:interface" {
+    when "derived-from-or-self(if:type, 'ianaift:ethernetCsmacd')";
+    description
+      "Augment interface model with IEEE Std 802.3 Ethernet interface
+       specific configuration nodes.";
+    leaf ethernet-id {
+      type string;
+      mandatory true;
+    }
+    leaf link-group {
+      type string;
+      mandatory false;
+      description
+        "Reference to the interface list representing the link-group this ethernet port belongs to, otherwise empty.";
+    }
+    leaf mtu {
+      type int32;
+      mandatory false;
+      description
+        "Maximum Transmission Unit size of the payload without fragmentation.";
+    }
+  }
+}

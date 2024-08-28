@@ -1,0 +1,811 @@
+module ietf-network-topology-ext {
+  yang-version 1.1;
+  namespace "urn:com:ericsson:schema:xml:ns:yang:ietf-network-topology-ext";
+  prefix ntext;
+
+  import ietf-network {
+    prefix nw;
+  }
+  import ietf-interfaces {
+    prefix if;
+  }
+  import ietf-network-topology {
+    prefix nt;
+  }
+  import ietf-yang-types {
+    prefix yang;
+    reference
+      "RFC 6991";
+  }
+
+  organization
+    "Ericsson AB";
+  contact
+    "Web: <http://www.ericsson.com>";
+  description
+    "The network topology extension yang module for newly defined attributes
+     Copyright (c) 2022 Ericsson AB.
+     All rights reserved";
+
+  revision 2022-04-01 {
+    description
+      "Defined new attributes in standard network topology";
+  }
+
+  grouping layer-rate {
+    leaf layer-rate {
+      type enumeration {
+        enum undefined {
+          value 0;
+          description
+            "Interface has no assigned rate, for example the port is not fully configured.";
+        }
+        enum ethernet-10mb {
+          value 75;
+          description
+            "10 Mbit/s Ethernet signal (Fast Ethernet).";
+        }
+        enum ethernet-50mb {
+          value 74;
+          description
+            "50 Mbit/s Ethernet signal.";
+        }
+        enum ethernet-100mb {
+          value 1;
+          description
+            "100 Mbit/s Ethernet signal (Fast Ethernet).";
+        }
+        enum ethernet-1gb {
+          value 2;
+          description
+            "1 Gbit/s Ethernet signal (Gigabit Ethernet).";
+        }
+        enum ethernet-10gb {
+          value 3;
+          description
+            "10 Gbit/s Ethernet signal.";
+        }
+        enum ethernet-2.5gb {
+          value 77;
+          description
+            "2.5 Gbit/s Ethernet signal.";
+        }
+        enum ethernet-25gb {
+          value 76;
+          description
+            "25 Gbit/s Ethernet signal.";
+        }
+        enum ethernet-40gb {
+          value 4;
+          description
+            "40 Gbit/s Ethernet signal.";
+        }
+        enum ethernet-100gb {
+          value 5;
+          description
+            "100 Gbit/s Ethernet signal.";
+        }
+        enum wan {
+          value 6;
+          description
+            "Ethernet signal encapsulated in a transport technology, e.g. SDH, PDH, Microwave Radio Link.";
+        }
+        enum pdh-ime {
+          value 7;
+          description
+            "Aggregation of PDH signals, e.g. n x E1.";
+        }
+        enum stm1 {
+          value 11;
+          description
+            "STM-1 digital signal rate (SDH).";
+        }
+        enum stm4 {
+          value 12;
+          description
+            "STM-4 digital signal rate (SDH).";
+        }
+        enum stm16 {
+          value 13;
+          description
+            "STM-16 digital signal rate (SDH).";
+        }
+        enum stm64 {
+          value 14;
+          description
+            "STM-64 digital signal rate (SDH).";
+        }
+        enum stm256 {
+          value 15;
+          description
+            "STM-256 digital signal rate (SDH).";
+        }
+        enum e1 {
+          value 21;
+          description
+            "2 Mbit/s PDH signal (European hierarchy).";
+        }
+        enum e2 {
+          value 22;
+          description
+            "8 Mbit/s PDH signal (European hierarchy).";
+        }
+        enum e3 {
+          value 23;
+          description
+            "34 Mbit/s PDH signal (European hierarchy).";
+        }
+        enum t1-ds1 {
+          value 24;
+          description
+            "1.5 Mbit/s PDH signal rate (North American hierarchy).";
+        }
+        enum t2-ds2 {
+          value 25;
+          description
+            "6 Mbit/s PDH signal rate (North American hierarchy).";
+        }
+        enum t3-ds3 {
+          value 26;
+          description
+            "45 Mbit/s PDH signal rate (North American hierarchy).";
+        }
+        enum j1 {
+          value 27;
+          description
+            "1.5 Mbit/s PDH signal rate (Japanese hierarchy).";
+        }
+        enum ots-dwdm {
+          value 31;
+          description
+            "Optical Transport Section, i.e. entire WDM optical signal.";
+        }
+        enum cpri2 {
+          value 41;
+          description
+            "CPRI rate-2 signal.";
+        }
+        enum cpri3 {
+          value 42;
+          description
+            "CPRI rate-3 signal.";
+        }
+        enum cpri5 {
+          value 43;
+          description
+            "CPRI rate-5 signal.";
+        }
+        enum cpri7 {
+          value 44;
+          description
+            "CPRI rate-7 signal.";
+        }
+        enum cpri8 {
+          value 45;
+          description
+            "CPRI rate-8 signal.";
+        }
+        enum cpri10 {
+          value 46;
+          description
+            "CPRI rate-10 signal.";
+        }
+        enum oc1 {
+          value 51;
+          description
+            "OC-1 digital signal rate (SONET)";
+        }
+        enum oc3 {
+          value 52;
+          description
+            "OC-3 digital signal rate (SONET)";
+        }
+        enum oc12 {
+          value 53;
+          description
+            "OC-12 digital signal rate (SONET)";
+        }
+        enum oc24 {
+          value 54;
+          description
+            "OC-24 digital signal rate (SONET)";
+        }
+        enum oc48 {
+          value 55;
+          description
+            "OC-48 digital signal rate (SONET)";
+        }
+        enum oc192 {
+          value 56;
+          description
+            "OC-192 digital signal rate (SONET)";
+        }
+        enum oc768 {
+          value 57;
+          description
+            "OC-768 digital signal rate (SONET)";
+        }
+        enum fc-1gb {
+          value 61;
+          description
+            "OC-768 digital signal rate (SONET)";
+        }
+        enum fc-2gb {
+          value 62;
+          description
+            "2 Gbit/s Fiber Channel signal";
+        }
+        enum fc-4gb {
+          value 63;
+          description
+            "4 Gbit/s Fiber Channel signal";
+        }
+        enum fc-8gb {
+          value 64;
+          description
+            "8 Gbit/s Fiber Channel signal";
+        }
+        enum fc-10gb {
+          value 65;
+          description
+            "10 Gbit/s Fiber Channel signal";
+        }
+        enum fc-16gb {
+          value 66;
+          description
+            "16 Gbit/s Fiber Channel signal";
+        }
+        enum fc-20gb {
+          value 67;
+          description
+            "20 Gbit/s Fiber Channel signal";
+        }
+        enum link-aggregation {
+          value 71;
+          description
+            "Logical aggregation of Ethernet signals";
+        }
+        enum radio-carrier {
+          value 72;
+          description
+            "Microwave radio carrier signal";
+        }
+        enum radio-link-terminal {
+          value 73;
+          description
+            "Microwave radio link i.e. logical bonding of Microwave Radio carrier signals";
+        }
+        enum 10mb {
+          value 10;
+          description
+            "10Mb";
+        }
+        enum 50mb {
+          value 50;
+          description
+            "50Mb";
+        }
+        enum 100mb {
+          value 100;
+          description
+            "100Mb";
+        }
+        enum 1gb {
+          value 1000;
+          description
+            "1Gb";
+        }
+        enum 10gb {
+          value 10000;
+          description
+            "10Gb";
+        }
+        enum 40gb {
+          value 40000;
+          description
+            "40Gb";
+        }
+        enum 100gb {
+          value 100000;
+          description
+            "100Gb";
+        }
+        enum cpri-auto {
+          value 78;
+          description
+            "CPRI speed option for auto-negotiation";
+        }
+      }
+      mandatory false;
+      description
+        "Information about the transmission medium of the link.";
+    }
+  }
+
+  grouping supporting-links-layer-rate {
+    leaf supporting-links-layer-rate {
+      type enumeration {
+        enum undefined {
+          value 0;
+          description
+            "Interface has no assigned rate, for example the port is not fully configured.";
+        }
+        enum ethernet-10mb {
+          value 75;
+          description
+            "10 Mbit/s Ethernet signal (Fast Ethernet).";
+        }
+        enum ethernet-50mb {
+          value 74;
+          description
+            "50 Mbit/s Ethernet signal.";
+        }
+        enum ethernet-100mb {
+          value 1;
+          description
+            "100 Mbit/s Ethernet signal (Fast Ethernet).";
+        }
+        enum ethernet-1gb {
+          value 2;
+          description
+            "1 Gbit/s Ethernet signal (Gigabit Ethernet).";
+        }
+        enum ethernet-10gb {
+          value 3;
+          description
+            "10 Gbit/s Ethernet signal.";
+        }
+        enum ethernet-2.5gb {
+          value 77;
+          description
+            "2.5 Gbit/s Ethernet signal.";
+        }
+        enum ethernet-25gb {
+          value 76;
+          description
+            "25 Gbit/s Ethernet signal.";
+        }
+        enum ethernet-40gb {
+          value 4;
+          description
+            "40 Gbit/s Ethernet signal.";
+        }
+        enum ethernet-100gb {
+          value 5;
+          description
+            "100 Gbit/s Ethernet signal.";
+        }
+        enum wan {
+          value 6;
+          description
+            "Ethernet signal encapsulated in a transport technology, e.g. SDH, PDH, Microwave Radio Link.";
+        }
+        enum pdh-ime {
+          value 7;
+          description
+            "Aggregation of PDH signals, e.g. n x E1.";
+        }
+        enum stm1 {
+          value 11;
+          description
+            "STM-1 digital signal rate (SDH).";
+        }
+        enum stm4 {
+          value 12;
+          description
+            "STM-4 digital signal rate (SDH).";
+        }
+        enum stm16 {
+          value 13;
+          description
+            "STM-16 digital signal rate (SDH).";
+        }
+        enum stm64 {
+          value 14;
+          description
+            "STM-64 digital signal rate (SDH).";
+        }
+        enum stm256 {
+          value 15;
+          description
+            "STM-256 digital signal rate (SDH).";
+        }
+        enum e1 {
+          value 21;
+          description
+            "2 Mbit/s PDH signal (European hierarchy).";
+        }
+        enum e2 {
+          value 22;
+          description
+            "8 Mbit/s PDH signal (European hierarchy).";
+        }
+        enum e3 {
+          value 23;
+          description
+            "34 Mbit/s PDH signal (European hierarchy).";
+        }
+        enum t1-ds1 {
+          value 24;
+          description
+            "1.5 Mbit/s PDH signal rate (North American hierarchy).";
+        }
+        enum t2-ds2 {
+          value 25;
+          description
+            "6 Mbit/s PDH signal rate (North American hierarchy).";
+        }
+        enum t3-ds3 {
+          value 26;
+          description
+            "45 Mbit/s PDH signal rate (North American hierarchy).";
+        }
+        enum j1 {
+          value 27;
+          description
+            "1.5 Mbit/s PDH signal rate (Japanese hierarchy).";
+        }
+        enum ots-dwdm {
+          value 31;
+          description
+            "Optical Transport Section, i.e. entire WDM optical signal.";
+        }
+        enum cpri2 {
+          value 41;
+          description
+            "CPRI rate-2 signal.";
+        }
+        enum cpri3 {
+          value 42;
+          description
+            "CPRI rate-3 signal.";
+        }
+        enum cpri5 {
+          value 43;
+          description
+            "CPRI rate-5 signal.";
+        }
+        enum cpri7 {
+          value 44;
+          description
+            "CPRI rate-7 signal.";
+        }
+        enum cpri8 {
+          value 45;
+          description
+            "CPRI rate-8 signal.";
+        }
+        enum cpri10 {
+          value 46;
+          description
+            "CPRI rate-10 signal.";
+        }
+        enum oc1 {
+          value 51;
+          description
+            "OC-1 digital signal rate (SONET)";
+        }
+        enum oc3 {
+          value 52;
+          description
+            "OC-3 digital signal rate (SONET)";
+        }
+        enum oc12 {
+          value 53;
+          description
+            "OC-12 digital signal rate (SONET)";
+        }
+        enum oc24 {
+          value 54;
+          description
+            "OC-24 digital signal rate (SONET)";
+        }
+        enum oc48 {
+          value 55;
+          description
+            "OC-48 digital signal rate (SONET)";
+        }
+        enum oc192 {
+          value 56;
+          description
+            "OC-192 digital signal rate (SONET)";
+        }
+        enum oc768 {
+          value 57;
+          description
+            "OC-768 digital signal rate (SONET)";
+        }
+        enum fc-1gb {
+          value 61;
+          description
+            "OC-768 digital signal rate (SONET)";
+        }
+        enum fc-2gb {
+          value 62;
+          description
+            "2 Gbit/s Fiber Channel signal";
+        }
+        enum fc-4gb {
+          value 63;
+          description
+            "4 Gbit/s Fiber Channel signal";
+        }
+        enum fc-8gb {
+          value 64;
+          description
+            "8 Gbit/s Fiber Channel signal";
+        }
+        enum fc-10gb {
+          value 65;
+          description
+            "10 Gbit/s Fiber Channel signal";
+        }
+        enum fc-16gb {
+          value 66;
+          description
+            "16 Gbit/s Fiber Channel signal";
+        }
+        enum fc-20gb {
+          value 67;
+          description
+            "20 Gbit/s Fiber Channel signal";
+        }
+        enum link-aggregation {
+          value 71;
+          description
+            "Logical aggregation of Ethernet signals";
+        }
+        enum radio-carrier {
+          value 72;
+          description
+            "Microwave radio carrier signal";
+        }
+        enum radio-link-terminal {
+          value 73;
+          description
+            "Microwave radio link i.e. logical bonding of Microwave Radio carrier signals";
+        }
+        enum 10mb {
+          value 10;
+          description
+            "10Mb";
+        }
+        enum 50mb {
+          value 50;
+          description
+            "50Mb";
+        }
+        enum 100mb {
+          value 100;
+          description
+            "100Mb";
+        }
+        enum 1gb {
+          value 1000;
+          description
+            "1Gb";
+        }
+        enum 10gb {
+          value 10000;
+          description
+            "10Gb";
+        }
+        enum 40gb {
+          value 40000;
+          description
+            "40Gb";
+        }
+        enum 100gb {
+          value 100000;
+          description
+            "100Gb";
+        }
+        enum cpri-auto {
+          value 78;
+          description
+            "CPRI speed option for auto-negotiation";
+        }
+      }
+      mandatory false;
+      description
+        "Information about the transmission medium of the link.";
+    }
+  }
+
+  grouping link-type {
+    leaf type {
+      type enumeration {
+        enum not-available {
+          value 0;
+          description
+            "The type of link is not available because the node cannot provide this kind of information. For example, the port is not fully configured, or the node model does not support this information.";
+        }
+        enum electrical {
+          value 1;
+          description
+            "The transmission medium of the link is electrical, for example copper wire or coaxial cable.";
+        }
+        enum optical {
+          value 2;
+          description
+            "The transmission medium of the link is optical, for example fiber.";
+        }
+        enum radio {
+          value 3;
+          description
+            "The transmission medium of the link is radio microwaves, for example radio carrier.";
+        }
+        enum aggregation {
+          value 4;
+          description
+            "Logical link which aggregates lower layer links, for example Link Aggregation Group (IEEE 802.3ad).";
+        }
+        enum encapsulation {
+          value 5;
+          description
+            "Logical link which encapsulates signal in one lower layer link, for example Ethernet WAN port encapsulated in Microwave Radio Link.";
+        }
+        enum radio-bonding {
+          value 6;
+          description
+            "Microwave radio link transmitted over one or more radio carriers.";
+        }
+      }
+      mandatory false;
+      description
+        "Information about the transmission medium of the link.";
+    }
+  }
+
+  grouping alarm-status {
+    leaf alarm-status {
+      type enumeration {
+        enum unknown {
+          value 0;
+          description
+            "The alarm status is unknown.";
+        }
+        enum under-repair {
+          value 1;
+          description
+            "The alarm status is irrelevant since the source is under repair.";
+        }
+        enum critical {
+          value 2;
+          description
+            "Indicates that a service affecting condition has occurred and an immediate corrective action is required.";
+        }
+        enum major {
+          value 3;
+          description
+            "Indicates that a service affecting condition has developed and an urgent corrective action is required.";
+        }
+        enum minor {
+          value 4;
+          description
+            "Indicates the existence of a non-service affecting fault condition and that corrective action should be taken in order to prevent a more serious (for example, service affecting) fault.";
+        }
+        enum warning {
+          value 5;
+          description
+            "Indicates the detection of a potential or impending service affecting fault, before any significant effects have been felt.";
+        }
+        enum indeterminate {
+          value 6;
+          description
+            "Indicates that the severity level could not be determined.";
+        }
+        enum cleared {
+          value 7;
+          description
+            "Indicates that the alarm has been cleared.";
+        }
+      }
+      mandatory false;
+      description
+        "Alarm status of the Link.";
+    }
+  }
+
+  augment "/nw:networks/nw:network/nt:link" {
+    description
+      "Addition of data nodes for link to
+       the standard Network topology data model.";
+    leaf description {
+      type string;
+      mandatory false;
+      description
+        "Free descriptive text.";
+    }
+    leaf active {
+      type boolean;
+      mandatory false;
+      description
+        "Link is active when end point interfaces are enabled.";
+    }
+    uses link-type;
+    leaf sdn-applicable {
+      type boolean;
+      mandatory false;
+      description
+        "SDN related information. Not managed.";
+    }
+    leaf sdn-populated {
+      type boolean;
+      mandatory false;
+      description
+        "SDN related information. Not managed.";
+    }
+    leaf supporting-links-number {
+      type int32;
+      mandatory false;
+      description
+        "The number of supporting links of a logical link.";
+    }
+    uses alarm-status;
+    leaf created-by {
+      type string;
+      mandatory false;
+      description
+        "Name of the operator, or system, which created the link.";
+    }
+    leaf creation-date {
+      type yang:date-and-time;
+      mandatory false;
+      description
+        "Date and time when the link was created.";
+    }
+    leaf discovery-state {
+      type enumeration {
+        enum discovered {
+          value 1;
+          description
+            "The link has been discovered from the network, for example through LLDP protocol or Radio Link near end/far end information.";
+        }
+        enum current {
+          value 2;
+          description
+            "The link has one end point, or both, which conflicts with a link discovered from the network.";
+        }
+        enum not-discovered {
+          value 3;
+          description
+            "The link has no correspondence in the network, for example the link has been created by the user or the link was discovered in the past but the network does not report its presence anymore.";
+        }
+      }
+    }
+    uses layer-rate;
+    leaf link-name {
+      type string;
+      mandatory false;
+      description
+        "The name of the link";
+    }
+    uses supporting-links-layer-rate;
+    leaf supported-links {
+      type leafref {
+        path "/nw:networks/nw:network/nt:link/nt:link-id";
+      }
+      description
+        "Identifies the link or links in the overlay topology, which depend on this link";
+    }
+  }
+
+  augment "/nw:networks/nw:network/nw:node/nt:termination-point" {
+    description
+      "Addition of data nodes for termination point  to
+       the standard Network topology data model";
+    leaf if-ref {
+      type if:interface-ref;
+      description
+        "Reference to the corresponding Interface";
+    }
+    leaf link {
+      type leafref {
+        path "/nw:networks/nw:network/nt:link/nt:link-id";
+      }
+      description
+        "Reference to the Link to which the Termination Point belongs to";
+    }
+  }
+}

@@ -1,0 +1,93 @@
+module ietf-interfaces-ext {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-interfaces-ext";
+  prefix ifext;
+
+  import ietf-interfaces {
+    prefix if;
+  }
+  import ietf-network {
+    prefix nw;
+  }
+  import ietf-network-topology {
+    prefix nt;
+  }
+  import ietf-network-topology-ext {
+    prefix ntext;
+  }
+
+  organization
+    "Ericsson AB";
+  contact
+    "Web: <http://www.ericsson.com>";
+  description
+    "The interface extension yang module for newly defined attributes
+     Copyright (c) 2022 Ericsson AB.
+     All rights reserved";
+
+  revision 2022-04-01 {
+    description
+      "Defined new attributes in standard interface model";
+  }
+
+  grouping link-type {
+    leaf link-type {
+      type enumeration {
+        enum not-available {
+          value 0;
+          description
+            "The type of link is not available because the node cannot provide this kind of information. For example, the port is not fully configured, or the node model does not support this information.";
+        }
+        enum electrical {
+          value 1;
+          description
+            "The transmission medium of the link is electrical, for example copper wire or coaxial cable.";
+        }
+        enum optical {
+          value 2;
+          description
+            "The transmission medium of the link is optical, for example fiber.";
+        }
+        enum radio {
+          value 3;
+          description
+            "The transmission medium of the link is radio microwaves, for example radio carrier.";
+        }
+        enum aggregation {
+          value 4;
+          description
+            "Logical link which aggregates lower layer links, for example Link Aggregation Group (IEEE 802.3ad).";
+        }
+        enum encapsulation {
+          value 5;
+          description
+            "Logical link which encapsulates signal in one lower layer link, for example Ethernet WAN port encapsulated in Microwave Radio Link.";
+        }
+        enum radio-bonding {
+          value 6;
+          description
+            "Microwave radio link transmitted over one or more radio carriers.";
+        }
+      }
+      mandatory false;
+      description
+        "Information about the transmission medium of the link.";
+    }
+  }
+
+  augment "/if:interfaces/if:interface" {
+    description
+      "Addition of data nodes for interface to
+       the standard Interface data model.";
+    uses ntext:layer-rate;
+    uses link-type;
+    uses ntext:alarm-status;
+    leaf link-tp {
+      type leafref {
+        path "/nw:networks/nw:network/nw:node/nt:termination-point/nt:tp-id";
+      }
+      description
+        "Reference to the list representing the termination-point to which this interface belongs, if exists";
+    }
+  }
+}
